@@ -1,0 +1,161 @@
+url: https://medium.com/@adarshvijayakumar1999/getting-started-with-tensorflow-33e567db37cc
+
+Title: GETTING STARTED WITH TENSORFLOW. HEY THERE! THIS IS MY FIRST BLOG. THIS…
+by Adarsh Vijayakumar
+
+INTRODUCTION
+
+Getting Started With TensorFlowAdarsh Vijayakumar·Follow15 min read·May 17, 2024--ListenShare
+
+Hey there! This is my first blog. This blog aims to give you the basic fundamental aspects in the TensorFlow framework. We’ll focus on getting started with TensorFlow by exploring some of its most essential functions and operations. We’ll break down complex concepts into easily digestible pieces, providing clear explanations and practical examples along the way.Keep in mind that we won’t cover the entire TensorFlow library, as it is quite extensive. If you’re unfamiliar with any concepts discussed here, don’t worry — I will provide links to important resources for each function to help you out.
+
+WHAT IS TENSORFLOW AND WHY WE ARE USING IT?
+TensorFlow is an open-source, end-to-end machine learning and deep learning framework. Instead of building a model from scratch, you can leverage this framework, which offers numerous functions for data preprocessing, modeling, and provides great flexibility in designing model architectures. It’s highly likely that you’ll use libraries like TensorFlow for your projects. While there are other excellent libraries, such as PyTorch, this blog will focus on TensorFlow.
+
+TENSORS
+Tensors are essentially like NumPy arrays, and they are built on top of them. NumPy arrays enable us to create multi-dimensional numerical representations of various types of data, such as image data or text data. Here are some examples:
+
+An image can be represented as a multi-dimensional array, where each dimension corresponds to attributes such as the image’s width, height, and color channels.Similarly, a dataset or DataFrame containing numerical or categorical values can also be converted into tensors for using it in a model.
+Resource : https://www.youtube.com/watch?v=f5liqUk0ZTw
+This is an excellent video on describing what tensors are. Go through it if we want to get familiar with what tensors are.
+Questions you might ask :
+Why only numbers ?That’s an excellent question. Our models can only understand numbers. Why numbers? Because solving a problem with a model involves mathematical computations. As we know, we can’t perform mathematical computations directly on categorical data. This is where TensorFlow comes in handy. It allows us to convert various types of information into tensors (essentially numbers) and feed them into our model.Why use TensorFlow if we have numpy arrays?The main difference between tensors and NumPy arrays is that tensors can be used on GPUs (Graphics Processing Units) and TPUs (Tensor Processing Units). In deep learning, computations can become so complex that a CPU may not have the processing power to handle them efficiently. The advantage? GPUs and TPUs can perform these computations much faster than CPUs. In summary, while NumPy arrays can only run on a CPU, tensors can run on both GPUs and TPUs.
+
+LET US START USING TENSORFLOW
+In order to get the TensorFlow library, we need to first import it.
+
+This imports the TensorFlow library and assigns it the alias ‘tf’. It also prints the version of TensorFlow that you are currently using.
+
+OPERATIONS WE WILL LEARN IN TENSORFLOW
+1. Creating Tensors (including Random Tensors)2. Retrieving information about a Tensor3. Manipulating Tensors4. Aggregating Tensors5. One-Hot Encoding Tensors
+Let’s dive into each of these topics.
+
+CREATING TENSORS
+Note: Generally, we won’t be creating Tensors manually because TensorFlow has built-in modules like ‘tf.io’ and ‘tf.data’ that can read our data and automatically convert it into tensors. Now, let’s explore how to create Tensors and how to interpret their structure.
+Creating a constant Tensor :
+This method creates a constant Tensor, meaning its values cannot be changed once it is initialized. When you need a Tensor with unchangeable values, you can use the tf.constant() method.
+
+Scalar is a single value without any dimension.A vector is a list of values with only one dimension.A matrix is a 2-D array of values with two dimensions.Tensors contain more than two dimensions.
+
+Now, let’s interpret the output:
+tf.Tensor: This is the object we've created, representing a Tensor Object returned by the tf.constant() method.
+
+shape: This defines the structure of our array in TensorFlow, indicating the number of elements across each Dimension or Axis. For instance, a shape of (2, 3, 4) means there are 2 elements in the first dimension, 3 in the second, and 4 in the third.
+
+dtype: This is the data type of the tensor, automatically detected and converted to 32-bit precision. Float values are converted to float32, while integer values are converted to int32.
+
+numpy: TensorFlow is built on top of NumPy. This attribute holds the data type and value of the TensorFlow object. Using tensor.numpy() will return the value inside that object.
+
+Look what happens when we try to change the value of a constant Tensor.
+
+Creating a Variable Tensor
+This method creates a variable Tensor, allowing values to be assigned to it even after initialization. When you need a Tensor with mutable properties, you can use the tf.Variable() method
+
+Let’s examine what it returns. It provides a Variable Object with parameters such as the shape of the tensor and the data type, which is int32 since we initialized it with integers. Additionally, it includes the numpy version. It’s important to note that you can change the values inside this tensor. The key distinction is that it returns a Variable Object rather than a Tensor Object.
+An example on how to change the value inside a Variable Tensor.
+
+Creating Random Tensors
+Random tensors play a crucial role, especially in initializing the patterns learned by the model. Initially, these patterns are often set as random tensors, and then the model adjusts these values to improve predictions for a given problem. There are various methods for creating random tensors. Remember, when using the random function, you need to provide a shape parameter.
+Creating random numbers from a normal distribution
+This creates a tensor with shape (2,3) and the values which follows a normal distribution with mean 0 and standard deviation 1.
+
+Creating random numbers from a uniform distribution
+This creates a tensor with shape (2,3) and the values which follows a uniform distribution with minimum value 0 and maximum value 10.
+
+Note: When running the code repeatedly, the random numbers inside the tensors may vary. If we want to reproduce the same random numbers, we can add a seed using tf.random.set_seed(42). This ensures reproducibility. The number 42 can be replaced with a seed of your choice.
+Creating Ones Tensor with desired Shape
+If you want a tensor to consist entirely of ones with a specified shape, you can use the tf.ones method to achieve this behavior.
+
+Creating Zeros Tensor with desired Shape
+Likewise, if you want a tensor consisting entirely of zeros with a specific shape, you can use the tf.zeros method to achieve this behavior.
+
+
+GETTING INFORMATION FROM A TENSOR
+
+Shape Attribute :
+This involves retrieving the shape of a Tensor. The shape indicates how many elements are present across each dimension in the Tensor. To obtain the shape of a tensor, we use the shape attribute of a tensor object.
+For example, if we have an image with dimensions 224 * 224 and it uses an RGB (Red, Green, Blue) color scale. When converted into tensors, the shape would be represented as (width, height, 3), where 3 signifies the RGB values for each pixel. Thus, the width would be 224 and the height would also be 224. To remember the structure of the shape, we can envision it as follows: Think of pixels, where each pixel is represented by 3 RGB values. If we move horizontally (to the right), there are 224 such pixels, representing the width. Similarly, if we move vertically (downwards), there are 224 such pixels, representing the height of the image. Therefore, the overall shape would be (224, 224, 3).
+
+Rank Attribute :
+The Rank of a Tensor represents the number of dimensions it has. To determine the rank of a Tensor, we use the ndim attribute of a Tensor object.
+Rank 0 Tensor is a scalar (no dimension)Rank 1 Tensor (1 dimension) is a vectorRank 2 Tensor (2 dimensions) is a matrixRank N Tensor (N dimensions) is a general Tensor.
+For example : In the case of an image, the number of dimensions is 3, as represented by (224, 224, 3), where there are 224 elements across the first dimension, 224 elements in the second dimension, and the last dimension contains 3 elements.
+
+Axis :
+An axis or dimension specifies a particular dimension of a Tensor. This becomes especially useful when performing operations on specific dimensions within the tensor. For instance, one common operation involves obtaining the minimum value from a tensor, which can be executed along any dimension of the tensor.
+This concept enables us to apply operations such as summation, averaging, or finding minimum/maximum values along specific dimensions, tailoring the computations to our specific needs within the tensor’s structure. By understanding and utilizing axes, we gain finer control over the manipulation and analysis of tensor data.
+For example : Getting the minimum value with the specified axis is given below.
+
+Size Attribute :
+Size refers to the total number of elements contained within a Tensor. This metric provides valuable insight into the overall volume or capacity of the tensor. Understanding the size is crucial for various operations and memory management tasks when working with tensors.
+For instance, when reshaping a tensor or computing its statistical properties, knowing the size helps ensure proper dimensionality and alignment of data. Moreover, when dealing with large datasets or memory constraints, being aware of the size allows for efficient memory allocation and optimization strategies.
+
+What is the need for getting these information from the tensor?
+Understanding the shape, dimensions, and size of tensors is crucial for several reasons. Often, models expect specific input shapes to process data effectively. By inspecting the shape of a tensor, we can preprocess it to match the required shape before feeding it into the model. This is vital because in neural networks, many issues arise from mismatches in input and output shapes.Mismatched shapes can lead to errors or suboptimal performance. Therefore, analyzing these tensor properties beforehand ensures clarity about the data being inputted into the model. Similarly, understanding the dimensions of the tensor helps ensure that our inputs to the neural network are formatted as expected, facilitating smoother model training and better performance.
+
+MANIPULATING TENSORS
+Basic Operations :
+
+Basic tensor operations encompass addition, subtraction, multiplication, and division. These operations are essential for manipulating tensors. For instance, when normalizing RGB values within image data, we utilize these operations to scale the tensors. Normalization enhances model computations by ensuring consistency and facilitating efficient data processing.
+
+Scaling the tensors include dividing/Multiplying each value in a tensor by particular value. For example an image pixel value from 0 to 255 will be normalized into a range of 0 and 1
+
+
+Matrix Multiplication :
+Matrix multiplication is a crucial operation, particularly within neural networks. Two fundamental rules govern matrix multiplication:
+Rule 1: The inner dimensions of the matrices must match.
+Rule 2: The resulting matrix will have dimensions corresponding to the outer dimensions of the input matrices.
+
+For example, consider matrix ‘a’ with a shape of (2,3), where 2 is the outer dimension and 3 is the inner dimension. Similarly, matrix ‘b’ has a shape of (3,2), with 3 as the outer dimension and 2 as the inner dimension. Following the aforementioned rules, we can perform matrix multiplication since the inner dimensions match (3 and 3), resulting in the outer dimensions defining the output shape (2 and 2).
+Changing the datatype of a tensor :
+Another crucial aspect of working with tensors is the need to adjust their data types. This is often necessary for memory efficiency or to ensure compatibility with specific operations or models. To accomplish this, we utilize the tf.cast() function, which allows us to change the data type of a tensor.
+For example, we may need to convert a tensor from float32 to int32 to reduce memory usage, or from int32 to float32 to perform certain mathematical operations. By employing tf.cast(), we can seamlessly modify the data type of a tensor to suit our requirements, ensuring efficient memory utilization and enabling smooth execution of desired computations.
+
+Reshaping a Tensor :
+When performing matrix multiplication, it’s crucial to adhere to the rules of matrix multiplication, as we discussed earlier. This often requires reshaping tensors to ensure compatibility between their dimensions. Reshaping is a frequently used function, especially in neural network applications, where shape mismatches are common.
+It’s important to note that when reshaping tensors, we must consider the total number of elements within the tensor. The shape attribute of the tensor should be compatible with the number of elements present to ensure the reshaping process is successful and maintains the integrity of the data.
+Performing Matrix Multiplication without reshaping.
+
+Performing Matrix Multiplication after reshaping the second tensor
+
+Transpose of a Tensor :
+Another form of reshaping involves flipping the axis instead of shifting the elements. This is the key distinction between reshaping and using the transpose method. Both methods can be employed for reshaping tensors, but flipping the axis with the transpose method is often considered best practice.
+
+Consider how the transpose operation : it flips the axes of the tensor rather than rearranging the elements to fit into specific dimensions while passing the remaining elements to the next dimension.
+
+AGGREGATING THE TENSORS
+Finding the minimum, maximum value in a Tensor across specific Dimension
+To determine the minimum and maximum values within a tensor, we can utilize TensorFlow’s functions, namely tf.reduce_max() and tf.reduce_min(). These functions enable us to find the minimum and maximum values across specific dimensions of the tensor.
+By incorporating the axis parameter, we can further refine this functionality, specifying the axis along which these operations should be performed. This parameter allows us to target specific dimensions within the tensor, providing greater flexibility in analyzing and extracting relevant information from the data.
+
+Finding the mean and sum of elements in a Tensor across a specific Dimension
+Similarly, we can utilize TensorFlow’s functions, such as tf.reduce_mean() and tf.reduce_sum(), to compute the mean and sum of elements within a tensor. These functions offer a convenient way to calculate aggregate statistics across specific dimensions of the tensor.
+By leveraging the axis parameter, we can specify the dimensions along which these operations should be applied, enabling us to obtain the mean and sum values tailored to our specific requirements within the tensor data. This flexibility facilitates efficient analysis and manipulation of tensor data, contributing to effective data processing in various computational tasks.
+
+Finding the positional Maximum and Minimum in a Tensor across a specific Dimension
+In classification problems, the output of a neural network typically consists of prediction probabilities. For example, if there are 10 classes, the output layer of the neural network will have 10 neurons, each representing a respective class. To determine the predicted class from these probabilities, we need to find the index of the maximum probability.
+To achieve this, we can utilize TensorFlow’s tf.argmax() function, which returns the index of the maximum value along a specified axis. This function allows us to identify the predicted class by finding the index corresponding to the highest probability among the output neurons.
+Similarly, to find the index of the minimum probability, we can use TensorFlow’s tf.argmin() function, which returns the index of the minimum value along a specified axis. By employing these functions, we can efficiently extract the predicted class from the output probabilities, facilitating the interpretation of the model’s predictions in a human-readable format.
+Keep in mind that the argmax() and argmin() functions return the indices of the maximum and minimum elements within the tensor, respectively.
+
+Squeezing a Tensor :
+In some cases, the single-dimensional axes (dimensions with size 1) are unnecessary. We can remove these single-dimensional axes using the squeeze() method to obtain a tensor with shape (3,). This can be beneficial for various reasons:
+Memory efficiency: Removing unnecessary single-dimensional axes can reduce the memory footprint of the tensor, making it more memory-efficient.Compatibility with operations: Some TensorFlow operations may expect tensors with certain shapes, and removing unnecessary single-dimensional axes can ensure compatibility with these operations.Output interpretation: In many cases, we may want the output of a neural network to be a scalar or have a specific shape. The squeeze() method allows us to reshape the output tensor accordingly for easier interpretation and further processing.
+
+Expanding the Dimension of a Tensor :
+Whenever we want to expand the dimensions of a Tensor, we will use this functionality. One such use case is when we are passing a single input to neural network but it expects a 2-Dimensional data as input. So we might use tf.expand_dims() to achieve this functionality. This operation is commonly employed to reshape tensors to match the expected input shape of certain operations or models.
+Overall it is a versatile function that allows us to manipulate the shape of tensors in TensorFlow, enabling us to meet the requirements of various operations, models, and data processing tasks.
+
+An alternative to the tf.expand_dims() method is to use tf.newaxis in TensorFlow. This approach achieves the same functionality of adding dimensions to a tensor but with a more concise syntax.
+With tf.newaxis, we can specify the axis along which we want to add a new dimension. The syntax is simple: tf.newaxis adds a new axis at the specified position, effectively increasing the dimensionality of the tensor.
+For example, if we have a tensor with shape (3,) and we want to convert it to a shape (3, 1), we can use tf.newaxis along the second axis:
+
+
+PREPROCESSING TENSORS
+Here we are only focussing on one-hot encoding for tensors. There are many more pre-processing that can be done on TensorFlow. Even we could pre-process images using the ImageDataGenerator class in TensorFlow. Feel free to look into the official documentation of TensorFlow.
+One-Hot Encoding Tensors :
+
+It’s important to remember that neural networks cannot directly handle string data. (Mentioned Earlier ) . To convert strings into a numerical format suitable for processing by machine learning or deep learning models, we often use a technique called “One-Hot-Encoding.” This method represents categorical variables as binary vectors, where each category is mapped to a unique binary value.
+In TensorFlow, we can achieve One-Hot-Encoding using the tf.one_hot() functionality. This function creates a one-hot tensor representation of categorical variables based on the input array. The parameter depth specifies the maximum value present in the array, determining the number of possible values in the encoding. For example, if the maximum value in the input array is 3, indicating four possible categories (0, 1, 2, and 3).
+
+Up to this point, we’ve covered some fundamental and essential functions that are commonly used when working with TensorFlow for building deep learning models. Understanding these basics is a crucial step in getting started with TensorFlow. However, it’s worth noting that TensorFlow offers a wide range of functions and capabilities beyond what we’ve discussed here. You can find detailed information about various functions, modules, and advanced features available in TensorFlow by going through the official documentaion of Tensorflow.
